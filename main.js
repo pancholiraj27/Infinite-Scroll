@@ -61,14 +61,14 @@ window.addEventListener("scroll", async function () {
   const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
   if (scrollTop + clientHeight >= scrollHeight) {
     // console.log((pageNumber = pageNumber + 1));
-
+    const apiData2 = [];
     await axios
       .get(
         `https://openlibrary.org/search.json?q=${userText}?page=${pageNumber++}`
       )
       .then(function (response) {
         response.data.docs.map((data) => {
-          apiData.push(data.title_suggest);
+          apiData2.push(data.title_suggest);
         });
       })
       .catch(function (error) {
@@ -78,8 +78,9 @@ window.addEventListener("scroll", async function () {
     console.log("can't do generate pages ");
   }
 
+  console.log("scrolling");
   // loop over the apiData
-  apiData.map((data) => {
+  apiData2.map((data) => {
     // creating h2 for appending to data display
     const dataH2 = document.createElement("h2");
     dataH2.innerText = data;
