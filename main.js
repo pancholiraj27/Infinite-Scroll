@@ -59,9 +59,11 @@ window.addEventListener("scroll", async function () {
   //   );
   //   console.log(scrollTop + clientHeight);
   const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
+
+  const apiData2 = [];
   if (scrollTop + clientHeight >= scrollHeight) {
     // console.log((pageNumber = pageNumber + 1));
-    const apiData2 = [];
+
     await axios
       .get(
         `https://openlibrary.org/search.json?q=${userText}?page=${pageNumber++}`
