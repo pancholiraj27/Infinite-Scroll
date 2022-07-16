@@ -34,9 +34,10 @@ async function infinityScrolling(e) {
     });
 
   displayStatus.innerText = "";
-
+  // remove duplicates from array
+  let uniqueData = [...new Set(apiData)];
   // loop over the apiData
-  apiData.map((data) => {
+  uniqueData.map((data) => {
     // creating h2 for appending to data display
     const dataH2 = document.createElement("h2");
     dataH2.innerText = data;
@@ -48,22 +49,10 @@ async function infinityScrolling(e) {
 window.addEventListener("scroll", async function () {
   const userText = textInput.value;
 
-  // check if page has scroll
-  //   console.log(
-  //     "scrollHeight",
-  //     scrollHeight,
-  //     "scrollTop",
-  //     scrollTop,
-  //     "clientHeight",
-  //     clientHeight
-  //   );
-  //   console.log(scrollTop + clientHeight);
   const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
 
   const apiData2 = [];
   if (scrollTop + clientHeight >= scrollHeight) {
-    // console.log((pageNumber = pageNumber + 1));
-
     await axios
       .get(
         `https://openlibrary.org/search.json?q=${userText}?page=${pageNumber++}`
